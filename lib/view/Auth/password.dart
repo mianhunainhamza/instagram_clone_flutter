@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:insta_clone/view/Auth/email.dart';
 
 class Password extends StatefulWidget {
-  const Password({super.key});
+  final username;
+  Password({super.key, required this.username});
 
   @override
   State<Password> createState() => _PasswordState();
@@ -94,7 +95,7 @@ class _PasswordState extends State<Password> {
             InkWell(
               onTap: (){
                 if(passController.text.length >= 6){
-                  Get.to(const Email());
+                  Get.to(Email(username: widget.username, password: passController.text));
                 }
               },
               child: Container(

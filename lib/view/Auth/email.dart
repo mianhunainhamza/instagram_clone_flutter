@@ -4,7 +4,11 @@ import 'package:get/get.dart';
 import 'confirm.dart';
 
 class Email extends StatefulWidget {
-  const Email({super.key});
+
+  final username;
+  final password;
+
+  Email({super.key, required this.username, this.password});
 
   @override
   State<Email> createState() => _EmailState();
@@ -41,6 +45,7 @@ class _EmailState extends State<Email> {
                 if(text.isEmpty){
                   setState(() {
                     show = false;
+                    buttonColor = Colors.blueAccent.shade100;
                   });
 
                 } else{
@@ -80,9 +85,10 @@ class _EmailState extends State<Email> {
             InkWell(
               onTap: (){
                 if (emailController.text.contains("@gmail.com") && emailController.text.isNotEmpty ){
-                  Get.to(const ConfirmPage());
+                  Get.to(ConfirmPage(username: widget.username,password: widget.password,email: emailController.text));
                 } else{
-                  Get.snackbar('Error', 'Invalid Email',backgroundColor: Colors.red);
+                  Get.snackbar('Email Error', 'Invalid Email',icon: Icon(Icons.error),
+                      borderRadius: 20);
                 }
               },
               child: Container(

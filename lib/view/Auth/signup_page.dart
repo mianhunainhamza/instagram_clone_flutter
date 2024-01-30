@@ -17,6 +17,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool show = false;
   bool enable = false;
   Color errorMsgColor = Colors.black;
+  Color buttonColor = Colors.blueAccent.shade100;
+
+  final usernameController = TextEditingController();
+
+  SignUpScreen cont = Get.put(SignUpScreen());
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +49,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
               // Text Field
               TextFormField(
-
+                controller: usernameController,
                 onChanged: (text) async {
                   setState(() {
                     show = false;
@@ -56,10 +61,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       enable = false;
                       isLoading = false;
                       errorMsgColor = Colors.black;
+                      buttonColor = Colors.blueAccent.shade100;
                     });
                   }
                   else if(isUsernameUnique && text.isNotEmpty){
                     setState(() {
+                      buttonColor = Colors.blueAccent;
                       enable = true;
                       show = true;
                       isLoading = false;
@@ -71,6 +78,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       show = false;
                       enable = false;
                       errorMsgColor = Colors.red;
+                      buttonColor = Colors.blueAccent.shade100;
                     });
                     //print('else');
                   }
@@ -98,13 +106,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
               // Next Button
               InkWell(
                 onTap: enable ? (){
-                Get.to(const Password());
+                Get.to(Password(username: usernameController.text));
                 } : null,
                 child: Container(
                   height: 45,
                 width: 450,
                 decoration: BoxDecoration(
-                  color: Colors.blueAccent,
+                  color: buttonColor,
                   borderRadius: BorderRadius.circular(10)
                 ),
                     child: isLoading? const Center(child: CircularProgressIndicator(color: Colors.white,)):
@@ -132,6 +140,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           show = false;
           enable = false;
           errorMsgColor = Colors.black;
+          buttonColor = Colors.blueAccent.shade100;
         }
       });
       FirebaseFirestore fire = FirebaseFirestore.instance;
