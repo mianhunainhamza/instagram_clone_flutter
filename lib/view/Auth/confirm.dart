@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:insta_clone/Model/user_modal.dart';
-import 'package:insta_clone/view/Auth/signup_page.dart';
 
 class ConfirmPage extends StatefulWidget {
 

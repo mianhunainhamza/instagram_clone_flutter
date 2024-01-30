@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:insta_clone/view/Auth/signup_controller.dart';
 
 import 'confirm.dart';
 
@@ -16,10 +17,9 @@ class Email extends StatefulWidget {
 
 class _EmailState extends State<Email> {
 
+  SignupController controller = Get.put(SignupController());
+
   final emailController = TextEditingController();
-  bool isLoading = false;
-  bool show = false;
-  Color buttonColor = Colors.blueAccent.shade100;
 
   @override
   Widget build(BuildContext context) {
@@ -40,30 +40,24 @@ class _EmailState extends State<Email> {
             const SizedBox(height: 25),
 
             // Text Field
-            TextFormField(
+            Obx(() => TextFormField(
               onChanged: (text){
                 if(text.isEmpty){
-                  setState(() {
-                    show = false;
-                    buttonColor = Colors.blueAccent.shade100;
-                  });
+                  controller.falseShow();
+                  controller.shade100();
 
                 } else{
-                  setState(() {
-                    show = true;
-                    buttonColor = Colors.blueAccent;
-                  });
+                  controller.trueShow();
+                  controller.shadeNormal();
                 }
               },
               controller: emailController,
               // Decoration
               decoration: InputDecoration(
-                suffixIcon: show? InkWell(
+                suffixIcon: controller.show.value? InkWell(
                     onTap: (){
                       emailController.clear();
-                      setState(() {
-                        show = false;
-                      });
+                      controller.falseShow();
                     },
                     child: const Icon(Icons.delete)): null,
                 contentPadding: const EdgeInsets.symmetric(horizontal: 20),
@@ -79,30 +73,31 @@ class _EmailState extends State<Email> {
                   borderRadius: BorderRadius.circular(5),
                 ),
               ),
-            ),
+            )),
+
             const SizedBox(height: 10),
             // Next Button
-            InkWell(
+            Obx(() =>InkWell(
               onTap: (){
                 if (emailController.text.contains("@gmail.com") && emailController.text.isNotEmpty ){
                   Get.to(ConfirmPage(username: widget.username,password: widget.password,email: emailController.text));
                 } else{
-                  Get.snackbar('Email Error', 'Invalid Email',icon: Icon(Icons.error),
-                      borderRadius: 20);
+                  Get.snackbar('Validation Error', 'Invalid Email',icon: Icon(Icons.error,color: Colors.red,),
+                      borderRadius: 25, colorText: Colors.red);
                 }
               },
               child: Container(
                   height: 45,
                   width: 450,
                   decoration: BoxDecoration(
-                      color: buttonColor,
+                      color: controller.buttonColor.value,
                       borderRadius: BorderRadius.circular(10)
                   ),
-                  child:isLoading? const Center(child: CircularProgressIndicator(color: Colors.white,)):
-                  const Center(
+                  child: const Center(
                       child: Text('Next',style: TextStyle(color: Colors.white),))
               ),
-            ),
+            ), )
+
 
 
           ],

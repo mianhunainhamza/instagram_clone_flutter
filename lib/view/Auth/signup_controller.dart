@@ -6,7 +6,8 @@ class SignupController extends GetxController{
    RxBool show = false.obs;
    RxBool enable = false.obs;
    Rx<Color> errorMsgColor = Colors.black.obs;
-
+   Rx<Color> buttonColor = Colors.blueAccent.shade100.obs;
+   RxBool checkBox = false.obs;
   trueLoading(){
     isLoading.value = true;
   }
@@ -37,5 +38,13 @@ class SignupController extends GetxController{
 
    redMsg(){
     errorMsgColor.value = Colors.red;
+   }
+
+   shade100() {
+    buttonColor.value = Colors.blueAccent.shade100;
+   }
+
+   shadeNormal(){
+    buttonColor.value = Colors.blueAccent;
    }
 }
