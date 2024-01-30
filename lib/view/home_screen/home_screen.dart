@@ -149,18 +149,6 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          showSelectedLabels: false,
-         showUnselectedLabels: false,
-         backgroundColor: Colors.black,
-         items : [
-            BottomNavigationBarItem(icon: Icon(Icons.home,color: Colors.white,size: 30,),label: 's'),
-           BottomNavigationBarItem(icon: Icon(CupertinoIcons.search,color: Colors.white,size: 30,),label: 's'),
-           BottomNavigationBarItem(icon: Icon(Icons.add_box_outlined,color: Colors.white,size: 30,),label: 's'),
-           BottomNavigationBarItem(icon: Icon(Icons.video_collection_outlined,color: Colors.white,size: 30,),label: 's'),
-           BottomNavigationBarItem(icon: Icon(CupertinoIcons.profile_circled,color: Colors.white,size: 30,),label: 's'),
-          ],
-        ),
       ),
     );
   }
