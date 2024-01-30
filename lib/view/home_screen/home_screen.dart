@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:insta_clone/view/home_screen/widgets/personal_story.dart';
+import 'package:insta_clone/view/home_screen/widgets/picture_post.dart';
 import 'package:insta_clone/view/home_screen/widgets/story_widget.dart';
+import 'package:insta_clone/view/home_screen/widgets/video_post.dart';
 import 'package:insta_clone/view_model/home_controller.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -17,6 +19,7 @@ class HomeScreen extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top: 10),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: context.isDarkMode ? Colors.black : Colors.white,
         appBar: AppBar(
           backgroundColor: context.isDarkMode ? Colors.black : Colors.white,
@@ -147,9 +150,21 @@ class HomeScreen extends StatelessWidget {
             const Divider(
               thickness: .2,
             ),
+            const SizedBox(
+              height: 5,
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height -295,
+              width: MediaQuery.of(context).size.width,
+              child: ListView.builder(
+                physics: BouncingScrollPhysics(),
+                itemCount: 6,
+                itemBuilder: (BuildContext context, int index) { return VideoPost();},),
+            )
           ],
         ),
       ),
     );
   }
 }
+
