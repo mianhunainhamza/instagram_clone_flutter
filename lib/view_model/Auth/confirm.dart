@@ -3,8 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:insta_clone/Model/user_modal.dart';
-import 'package:insta_clone/view/Auth/signup_page.dart';
+import 'package:insta_clone/view/signup_page.dart';
+
+import '../../model/user_modal.dart';
 
 class ConfirmPage extends StatefulWidget {
 
@@ -43,7 +44,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
             // Image
             Container(
                 height: 120,
-                child: Image.asset('assets/successImg.jpg')),
+                child: Image.asset('assets/images/successImg.jpg')),
             SizedBox(height: 12),
 
             // Welcome Text

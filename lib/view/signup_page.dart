@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'password.dart';
+import '../view_model/Auth/password.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
