@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:insta_clone/view/Auth/email.dart';
-import 'package:insta_clone/view/Auth/signup_controller.dart';
 
 class Password extends StatefulWidget {
   final username;
@@ -13,10 +12,11 @@ class Password extends StatefulWidget {
 
 class _PasswordState extends State<Password> {
 
-  SignupController controller = Get.put(SignupController());
+  bool checkBox = false;
+
+  Color buttonColor = Colors.blueAccent.shade100;
 
   final passController = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +25,7 @@ class _PasswordState extends State<Password> {
       body: Padding(
 
         padding: const EdgeInsets.all(28.0),
-        child:
-        Obx(() => Column(
+        child: Column(
           children: [
             const SizedBox(height: 50),
             const Text('Create a password',
@@ -37,8 +36,8 @@ class _PasswordState extends State<Password> {
             const SizedBox(height: 10),
             const Text('For security, your password must be 6 characters or more',
               style: TextStyle(
-                fontWeight: FontWeight.w200,
-                fontSize: 14,
+                  fontWeight: FontWeight.w200,
+                  fontSize: 14,
               ),
             ),
             const SizedBox(height: 18),
@@ -47,9 +46,13 @@ class _PasswordState extends State<Password> {
             TextFormField(
               onChanged: (text){
                 if(text.length >= 6){
-                  controller.shadeNormal();
+                  setState(() {
+                    buttonColor = Colors.blueAccent;
+                  });
                 } else{
-                  controller.shade100();
+                  setState(() {
+                    buttonColor = Colors.blueAccent.shade100;
+                  });
                 }
 
               },
@@ -76,8 +79,10 @@ class _PasswordState extends State<Password> {
             // Check Box
             Row(
               children: [
-                Checkbox(value: controller.checkBox.value, onChanged: (bool? value){
-                  controller.checkBox.value = value ?? false;
+                Checkbox(value: checkBox, onChanged: (bool? value){
+                    setState(() {
+                      checkBox = value ?? false;
+                    });
                 }),
                 const Text('Remember Password'),
               ],
@@ -87,7 +92,7 @@ class _PasswordState extends State<Password> {
 
 
             // Next Button
-            Obx(() => InkWell(
+            InkWell(
               onTap: (){
                 if(passController.text.length >= 6){
                   Get.to(Email(username: widget.username, password: passController.text));
@@ -97,19 +102,17 @@ class _PasswordState extends State<Password> {
                   height: 45,
                   width: 450,
                   decoration: BoxDecoration(
-                      color: controller.buttonColor.value,
+                      color: buttonColor,
                       borderRadius: BorderRadius.circular(10)
                   ),
                   child: const Center(
                       child: Text('Next',style: TextStyle(color: Colors.white),))
               ),
-            )),
-
+            ),
 
 
           ],
-        ),),
-
+        ),
       ),
     );
   }
