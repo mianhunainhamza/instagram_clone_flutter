@@ -28,7 +28,7 @@ class Story extends StatelessWidget {
             ),
           ),
           SizedBox(height: 5,),
-          Text('areeb_bondu',style: TextStyle(fontSize: 11),)
+          Text('mia_bondu',style: TextStyle(fontSize: 11),)
         ]
     );
   }
