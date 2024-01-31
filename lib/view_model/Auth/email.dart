@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:insta_clone/view/Auth/signup_controller.dart';
+import 'package:insta_clone/view_model/Auth/signup_controller.dart';
 
 import 'confirm.dart';
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:insta_clone/view/Auth/email.dart';
+
+import 'email.dart';
 
 class Password extends StatefulWidget {
   final username;
