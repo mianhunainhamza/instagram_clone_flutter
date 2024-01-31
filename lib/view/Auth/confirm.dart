@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get.dart';
 import 'package:insta_clone/Model/user_modal.dart';
+import 'package:insta_clone/view/Auth/signup_controller.dart';
 
 class ConfirmPage extends StatefulWidget {
 
@@ -24,7 +24,9 @@ class ConfirmPage extends StatefulWidget {
 
 class _ConfirmPageState extends State<ConfirmPage> {
 
-  bool isLoading = false;
+
+  SignupController controller = Get.put(SignupController());
+  //bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +60,7 @@ class _ConfirmPageState extends State<ConfirmPage> {
             SizedBox(height: 30),
 
             // Sign up button
-            InkWell(
+            Obx(() => InkWell(
               onTap: ()async{
                 await createUser(widget.email, widget.password);
                 await addUser();
@@ -70,19 +72,17 @@ class _ConfirmPageState extends State<ConfirmPage> {
                       color: Colors.blueAccent,
                       borderRadius: BorderRadius.circular(10)
                   ),
-                  child:isLoading? const Center(child: CircularProgressIndicator(color: Colors.white,)):
+                  child:controller.isLoading.value? const Center(child: CircularProgressIndicator(color: Colors.white,)):
                   const Center(
                       child: Text('Complete sign up',style: TextStyle(color: Colors.white),))
               ),
-            ),
+            ),),
+
             SizedBox(height: 100),
             Expanded(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Text('We will add private info from ${widget.email} to ${widget.username}. See ', style: TextStyle(
-                  fontSize: 10
-                ),),
-              ),
+              child: Text('We will add private info from ${widget.email} to ${widget.username}. See ', style: TextStyle(
+                fontSize: 10
+              ),),
             ),
             Text('Terms, Privacy Policy , Cookies Policy', style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -98,23 +98,15 @@ class _ConfirmPageState extends State<ConfirmPage> {
   // Auth account
   Future<void> createUser(String email, String password) async {
     try {
-      setState((){
-        isLoading = true;
-      });
-      print('login true');
+        controller.trueLoading();
       FirebaseAuth _auth = FirebaseAuth.instance;
-      print('Instance ');
       await _auth.createUserWithEmailAndPassword(email: email, password: password);
-      print('created');
-      Get.snackbar('Success', 'Account created successfully', duration: Duration(seconds: 2));
+      //Get.snackbar('Success', 'Account created successfully', duration: Duration(seconds: 2));
       //Get.to(SignUpScreen());
 
     } on FirebaseAuthException catch (e) {
-      setState(() {
-        isLoading = false;
-      });
+        controller.falseLoading();
       Get.snackbar('Auth Error',e.toString());
-      print(widget.email);
     }
 
   }
@@ -122,28 +114,19 @@ class _ConfirmPageState extends State<ConfirmPage> {
   // Firebase add
   Future<void> addUser() async {
     try {
-        setState(() {
-          isLoading = true;
-        });
+          controller.trueLoading();
       CollectionReference ref = FirebaseFirestore.instance.collection('User');
-      print('instance created for firestore');
       UserModal user = UserModal(
           username: widget.username,
           password: widget.password,
           email: widget.email
       );
-        print('user modal created for firestore');
       await ref.add(user.toJson());
-        print('added');
-      setState(() {
-        isLoading = false;
-      });
-      Get.snackbar('Success', 'Added successfully');
+        controller.falseLoading();
+      //Get.snackbar('Success', 'Added successfully');
 
     }  catch (e) {
-      setState(() {
-        isLoading = false;
-      });
+        controller.falseLoading();
       Get.snackbar('FireStore Error',e.toString());
     }
   }
