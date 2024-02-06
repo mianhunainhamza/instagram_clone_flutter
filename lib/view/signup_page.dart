@@ -33,10 +33,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   fontSize: 26
                 ),),
               const SizedBox(height: 10),
-              const Text('You can always change it later',
+              Text('You can always change it later',
               style: TextStyle(
-                fontWeight: FontWeight.w200,
-                fontSize: 14
+                fontSize: 12,
+                color: Colors.white.withOpacity(.5)
               ),
               ),
               const SizedBox(height: 20),
@@ -112,8 +112,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Obx(() => Text('Username already exist', style: TextStyle(
                   color: controller.errorMsgColor.value
               ),)),
-
-
             ],
           ),
         ),
@@ -140,7 +138,5 @@ class _SignUpScreenState extends State<SignUpScreen> {
       return false;
     }
   }
-
-
 }
 

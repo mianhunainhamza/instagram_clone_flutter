@@ -2,12 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:insta_clone/view/home_screen/widgets/personal_story.dart';
-import 'package:insta_clone/view/home_screen/widgets/picture_post.dart';
 import 'package:insta_clone/view/home_screen/widgets/story_widget.dart';
 import 'package:insta_clone/view/home_screen/widgets/video_post.dart';
 import 'package:insta_clone/view_model/home_controller.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -124,15 +122,12 @@ class HomeScreen extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         itemCount: 12,
                         itemBuilder: (context, index) {
-                          // Check if it's the first item
                           if (index == 0) {
-                            // Apply a different design for the first item
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: PersonalStory(),
                             );
                           } else {
-                            // Apply the design for other items
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Story(),

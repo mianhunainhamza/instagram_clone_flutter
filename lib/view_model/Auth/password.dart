@@ -29,16 +29,15 @@ class _PasswordState extends State<Password> {
         child: Column(
           children: [
             const SizedBox(height: 50),
-            const Text('Create a password',
+             Text('Create a password',
               style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 26
+                  fontSize: 26,
               ),),
             const SizedBox(height: 10),
-            const Text('For security, your password must be 6 characters or more',
+             Text('For security, your password must be 6 characters or more',
               style: TextStyle(
-                  fontWeight: FontWeight.w200,
                   fontSize: 14,
+                  color: Colors.white.withOpacity(.5)
               ),
             ),
             const SizedBox(height: 18),
