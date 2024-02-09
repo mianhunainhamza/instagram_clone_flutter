@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:insta_clone/view/Inbox/inbox.dart';
 import 'package:insta_clone/view/home_screen/widgets/personal_story.dart';
 import 'package:insta_clone/view/home_screen/widgets/story_widget.dart';
 import 'package:insta_clone/view/home_screen/widgets/video_post.dart';
@@ -48,10 +49,15 @@ class HomeScreen extends StatelessWidget {
             ),
             Stack(
               children: [
-                Icon(
-                  LineIcons.facebookMessenger,
-                  size: 35,
-                  color: context.isDarkMode ? Colors.white : Colors.black,
+                InkWell(
+                  onTap: (){
+                    Get.to(InboxScreen(),transition: Transition.cupertino);
+                  },
+                  child: Icon(
+                    LineIcons.facebookMessenger,
+                    size: 35,
+                    color: context.isDarkMode ? Colors.white : Colors.black,
+                  ),
                 ),
                 if (homeController.messageCount.value > 0)
                   Positioned(

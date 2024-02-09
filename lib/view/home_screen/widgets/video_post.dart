@@ -16,10 +16,10 @@ class VideoPost extends StatelessWidget {
           Container(
               height: 400,
               width: MediaQuery.of(context).size.width,
-              child: Image.network(
-                'https://placekitten.com/100/100',
-                fit: BoxFit.cover,
-              )),
+              child: Image.asset('assets/images/abdullahCui.jpg',
+              fit: BoxFit.cover,
+              )
+          ),
           Positioned(
             left: 6,
             top: 5,
