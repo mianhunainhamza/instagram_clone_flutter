@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:insta_clone/view/signup_page.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -189,7 +192,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Column(
+                 Column(
                   children: [
                     Divider(),
                     Padding(
@@ -204,12 +207,17 @@ class LoginScreen extends StatelessWidget {
                               fontSize: 12,
                             ),
                           ),
-                          Text(
-                            "Sign up.",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 202, 222, 255),
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
+                          InkWell(
+                            onTap: (){
+                              Get.to(SignUpScreen());
+                            },
+                            child: Text(
+                              "Sign up.",
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 202, 222, 255),
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ],
